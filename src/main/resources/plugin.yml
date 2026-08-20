@@ -1,0 +1,16 @@
+name: NuviraMCGeyser
+version: '${version}'
+
+main: net.nuviramc.nuviraMCGeyser.NuviraMCGeyser
+api-version: '26.2'
+load: POSTWORLD
+
+depend: ["floodgate"]
+
+authors: [ Larrox ]
+
+commands:
+  onplay:
+    description: "[NuviraMCGeyser] Öffnet ein Simples Fenster für Bedrock Spieler, um die Serverliste anzusehen."
+    aliases:
+      - onlineplayers
