@@ -1,2 +1,11 @@
 skinapi:
   url: "YOUR_SKIN_API"
+
+placeholders:
+  rank: "RANK_PLACEHOLDER"
+  clan: "CLAN_PLACEHOLDER"
+  balance: "BALANCE_PLACEHOLDER"
+  playtime: "PLAYTIME_PLACEHOLDER"
+  deaths: "DEATHS_PLACEHOLDER"
+  kills: "KILLS_PLACEHOLDER"
+  afk: "AFK_PLACEHOLDER"
