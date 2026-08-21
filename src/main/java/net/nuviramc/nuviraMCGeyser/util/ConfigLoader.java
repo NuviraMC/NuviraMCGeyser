@@ -1,15 +1,22 @@
 package net.nuviramc.nuviraMCGeyser.util;
 
-import org.bukkit.Bukkit;
+import net.nuviramc.nuviraMCGeyser.NuviraMCGeyser;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
 import java.io.File;
 
 public class ConfigLoader {
     private static FileConfiguration config;
 
     public static void load() {
-        File configFile = new File(Bukkit.getPluginManager().getPlugin("NuviraMCGeyser").getDataFolder(), "config.yml");
+        NuviraMCGeyser plugin = NuviraMCGeyser.getInstance();
+        File configFile = new File(plugin.getDataFolder(), "config.yml");
+
+        if (!configFile.exists()) {
+            plugin.saveResource("config.yml", false);
+        }
+
         config = YamlConfiguration.loadConfiguration(configFile);
     }
 
@@ -19,5 +26,9 @@ public class ConfigLoader {
 
     public static String getPlaceholder(String placeholder) {
         return config.getString("placeholders." + placeholder.toLowerCase());
+    }
+
+    public static void reload() {
+        load();
     }
 }
