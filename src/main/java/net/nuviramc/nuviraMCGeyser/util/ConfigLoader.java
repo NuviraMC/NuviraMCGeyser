@@ -16,4 +16,8 @@ public class ConfigLoader {
     public static String getSkinApiUrl() {
         return config.getString("skinapi.url");
     }
+
+    public static String getPlaceholder(String placeholder) {
+        return config.getString("placeholders." + placeholder.toLowerCase());
+    }
 }

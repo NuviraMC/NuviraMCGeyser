@@ -1,5 +1,6 @@
 package net.nuviramc.nuviraMCGeyser.util;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.geysermc.cumulus.form.SimpleForm;
@@ -47,6 +48,8 @@ public class SimpleFormBuilder {
         SimpleForm.Builder form = SimpleForm.builder()
                 .title("Statistiken - " + target.getName())
                 .content(buildStatsContent(target))
+                .content("§7Color Codes?")
+                .content("§7Color Codes?")
                 .button("Zurück");
 
         form.validResultHandler(response -> {
@@ -59,8 +62,13 @@ public class SimpleFormBuilder {
     }
 
     private String buildStatsContent(Player target) {
-        return "Level: " + target.getLevel() + "\n"
-                + "Health: " + target.getHealth() + "\n"
-                + "Ping: " + target.getPing() + "ms";
+        return "Rang: " + resolvePlaceholder(target, "rank") + "\n"
+                + "Clan: " + resolvePlaceholder(target, "clan") + "\n"
+                + "Ping: " + target.getPing() + "ms\n";
+    }
+
+    private String resolvePlaceholder(Player target, String key) {
+        String value = PlaceholderAPI.setPlaceholders(target, ConfigLoader.getPlaceholder(key));
+        return value != null ? value : "Placeholder nicht verfügbar.";
     }
 }
