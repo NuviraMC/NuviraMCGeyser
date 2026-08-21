@@ -48,8 +48,6 @@ public class SimpleFormBuilder {
         SimpleForm.Builder form = SimpleForm.builder()
                 .title("Statistiken - " + target.getName())
                 .content(buildStatsContent(target))
-                .content("§7Color Codes?")
-                .content("§7Color Codes?")
                 .button("Zurück");
 
         form.validResultHandler(response -> {
