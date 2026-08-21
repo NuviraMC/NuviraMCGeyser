@@ -10,6 +10,9 @@ depend: ["floodgate", "PlaceholderAPI"]
 authors: [ Larrox ]
 
 commands:
+  nvgeyser:
+    description: "[NuviraMCGeyser] Haupt-Plugin-Befehl des Plugins NuviraMCGeyser."
+
   onplay:
     description: "[NuviraMCGeyser] Öffnet ein Simples Fenster für Bedrock Spieler, um die Serverliste anzusehen."
     aliases:
