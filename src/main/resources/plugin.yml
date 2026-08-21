@@ -5,7 +5,7 @@ main: net.nuviramc.nuviraMCGeyser.NuviraMCGeyser
 api-version: '26.2'
 load: POSTWORLD
 
-depend: ["floodgate"]
+depend: ["floodgate", "PlaceholderAPI"]
 
 authors: [ Larrox ]
 
