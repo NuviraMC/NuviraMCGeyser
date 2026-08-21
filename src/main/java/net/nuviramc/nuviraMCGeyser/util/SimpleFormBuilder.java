@@ -11,6 +11,15 @@ import java.util.List;
 
 public class SimpleFormBuilder {
 
+    private static SimpleFormBuilder instance;
+
+    public static SimpleFormBuilder getInstance() {
+        if (instance == null) {
+            instance = new SimpleFormBuilder();
+        }
+        return instance;
+    }
+
     public void openServerList(Player viewer) {
         List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
 

@@ -28,7 +28,7 @@ public class CMDOpenserverlist implements CommandExecutor {
             return true;
         }
 
-        FloodgateApi.getInstance().sendForm(player.getUniqueId(), SimpleFormBuilder.getInstance().initServerList());
+        SimpleFormBuilder.getInstance().openServerList(player);
 
         return true;
     }
