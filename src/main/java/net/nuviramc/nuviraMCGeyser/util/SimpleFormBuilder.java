@@ -1,7 +1,11 @@
 package net.nuviramc.nuviraMCGeyser.util;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.geysermc.cumulus.form.SimpleForm;
 import org.geysermc.cumulus.util.FormImage;
@@ -13,6 +17,10 @@ import java.util.List;
 public class SimpleFormBuilder {
 
     private static SimpleFormBuilder instance;
+    private static final LegacyComponentSerializer LEGACY_SERIALIZER = LegacyComponentSerializer.builder()
+            .character('&')
+            .hexColors()
+            .build();
 
     public static SimpleFormBuilder getInstance() {
         if (instance == null) {
@@ -60,13 +68,25 @@ public class SimpleFormBuilder {
     }
 
     private String buildStatsContent(Player target) {
-        return "Rang: " + resolvePlaceholder(target, "rank") + "\n"
-                + "Clan: " + resolvePlaceholder(target, "clan") + "\n"
-                + "Ping: " + target.getPing() + "ms\n";
+        return "§7Rang§8: §r" + resolvePlaceholder(target, "rank") + "\n"
+                + "§7Clan§8: §b" + resolvePlaceholder(target, "clan") + "\n"
+                + "§7Geld§8: §a$" + resolvePlaceholder(target, "balance") + "\n"
+                + "§7Spielzeit§8: §b" + resolvePlaceholder(target, "playtime") + "\n"
+                + "§7Tode§8: §b" + resolvePlaceholder(target, "deaths") + "\n"
+                + "§7Kills§8: §b" + resolvePlaceholder(target, "kills") + "\n"
+                + "§7Afk§8: §b" + resolvePlaceholder(target, "afk") + "\n\n";
     }
 
-    private String resolvePlaceholder(Player target, String key) {
-        String value = PlaceholderAPI.setPlaceholders(target, ConfigLoader.getPlaceholder(key));
-        return value != null ? value : "Placeholder nicht verfügbar.";
+    private Component resolvePlaceholder(Player target, String key) {
+        String raw = ConfigLoader.getPlaceholder(key);
+        if (raw == null) {
+            return Component.text("Placeholder nicht verfügbar.");
+        }
+        String value = PlaceholderAPI.setPlaceholders(target, raw);
+        return translateColor(value);
+    }
+
+    private Component translateColor(String key) {
+        return LEGACY_SERIALIZER.deserialize(key);
     }
 }
